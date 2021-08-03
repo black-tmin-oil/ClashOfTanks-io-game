@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Clash Of Tanks</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="shortcut icon" href="/assets/tank.png">
+  <meta property="og:image" content="/assets/tank.png">
+</head>
+<body>
+  <canvas id="game-canvas"></canvas>
+  <div id="play-menu" class="hidden">
+    <h1>Clash of Tanks</h1>
+    <p>
+      Try to survive and kill other players.
+      <br />
+      Use a mouse to move.
+    </p>
+    <hr />
+    <p>
+      <!-- <br /> -->
+      Check out the source code on <a href="https://github.com/anna-vodimed/ClashOfTanks-io-game" target="_blank">Github</a>.
+      <br />
+      Created by A. Vodimed.
+    </p>
+    <hr />
+    <input type="text" id="username-input" placeholder="Enter your username" />
+    <button id="play-button">PLAY</button>
+  </div>
+  <div id="leaderboard" class="hidden">
+    <table>
+      <tr>
+        <th>NAME</th>
+        <th>SCORE</th>
+      </tr>
+      <tr><td></td><td></td></tr>
+      <tr><td></td><td></td></tr>
+      <tr><td></td><td></td></tr>
+      <tr><td></td><td></td></tr>
+      <tr><td></td><td></td></tr>
+    </table>
+  </div>
+  <div id="chat" class="hidden">
+    <table>
+      <tr>
+        <th>ONLINE CHAT</th>
+        <th></th>
+      </tr>
+      <tr><td></td><td></td></tr>
+      <tr><td></td><td></td></tr>
+      <tr><td></td><td></td></tr>
+      <tr><td></td><td></td></tr>
+      <tr><td></td><td></td></tr>
+    </table>
+    <input id='chat-input' type='text' placeholder='Press Enter to send' name='chat' />
+  </div>
+  <div id="disconnect-modal" class="hidden">
+    <div>
+      <h2>Disconnected from Server </h2>
+      <hr />
+      <button id="reconnect-button">RECONNECT</button>
+    </div>
+  </div>
+</body>
+</html>
