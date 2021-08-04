@@ -1,13 +1,12 @@
 {
-  "name": "io-game-from-scratch",
+  "name": "clash-of-tanks",
   "version": "1.0.0",
   "description": "",
   "main": "src/server/server.js",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
-    "lint": "eslint --cache --ext .js,.jsx src/",
     "develop": "cross-env NODE_ENV=development node src/server/server.js",
-    "start": "cross-env NODE_ENV=production node src/server/server.js"
+    "start": "node src/server/server.js"
   },
   "dependencies": {
     "express": "^4.17.1",
@@ -18,20 +17,13 @@
     "socket.io-client": "^2.3.0",
     "throttle-debounce": "^2.1.0",
     "webpack": "^4.43.0",
-    "webpack-dev-middleware": "^3.7.2"
-  },
-  "devDependencies": {
+    "webpack-dev-middleware": "^3.7.2",
     "@babel/core": "^7.10.2",
     "@babel/preset-env": "^7.10.2",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "cross-env": "^5.2.1",
     "css-loader": "^2.1.1",
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb-base": "^13.2.0",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-jest": "^23.7.0",
-    "jest": "^25.1.0",
     "mini-css-extract-plugin": "^0.6.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "webpack-cli": "^3.3.11",

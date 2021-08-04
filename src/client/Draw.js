@@ -6,14 +6,15 @@ const Constants = require('../lib/Constants');
 
 const { PLAYER_RADIUS, PLAYER_MAX_HP, BULLET_RADIUS, MAP_SIZE } = Constants;
 
-// Get the canvas graphics context
+//создание контекста canvas
 const canvas = document.getElementById('game-canvas');
 const context = canvas.getContext('2d');
 
 setCanvasDimensions();
 
+//взято с mozilla mdn
 function setCanvasDimensions() {
-  // On small screens (e.g. phones), we want to "zoom out" so players can still see at least
+  // On small screens (e.g. phones), "zooming out" so players can still see at least
   // 800 in-game units of width.
   const scaleRatio = Math.max(1, 800 / window.innerWidth);
   canvas.width = scaleRatio * window.innerWidth;
@@ -34,10 +35,8 @@ function render() {
   context.lineWidth = 1;
   context.strokeRect(canvas.width / 2 - me.x, canvas.height / 2 - me.y, MAP_SIZE, MAP_SIZE);
 
-  // Draw all bullets
   bullets.forEach(renderBullet.bind(null, me));
 
-  // Draw all players
   renderPlayer(me, me);
   others.forEach(renderPlayer.bind(null, me));
 }
@@ -55,10 +54,10 @@ function renderPlayer(me, player) {
   const { x, y, direction, username } = player;
   const canvasX = canvas.width / 2 + x - me.x;
   const canvasY = canvas.height / 2 + y - me.y;
-  // Draw tank
+
   context.save();
   context.translate(canvasX, canvasY);
-  //Draw tank username
+
   context.textAlign = 'center';
   context.font = '14px Helvetica';
   context.fillStyle = 'black';
@@ -74,7 +73,6 @@ function renderPlayer(me, player) {
   );
   context.restore();
 
-  // отрисовка индекатора здоровья
   context.fillStyle = 'white';
   context.fillRect(
     canvasX - PLAYER_RADIUS,
@@ -102,24 +100,23 @@ function renderBullet(me, bullet) {
   );
 }
 
-function renderMainMenu() {
+function  drawMenu() {
   const t = Date.now() / 7500;
   const x = MAP_SIZE / 2 + 800 * Math.cos(t);
   const y = MAP_SIZE / 2 + 800 * Math.sin(t);
   renderBackground(x, y);
 }
 
-let renderInterval = requestAnimationFrame(renderMainMenu, 1000 / 60);
+let renderInterval = requestAnimationFrame(drawMenu, 1000 / 60);
 
-// Replaces main menu rendering with game rendering.
 //отвечает за отрисовку игры вместо меню
-export function startRendering() {
+export function startGameDraw() {
   clearInterval(renderInterval);
   renderInterval = setInterval(render, 1000 / 60);
 }
 
-// Replaces game rendering with main menu rendering.
-export function stopRendering() {
+//наоборот
+export function stopGameDraw() {
   clearInterval(renderInterval);
-  renderInterval = setInterval(renderMainMenu, 1000 / 60);
+  renderInterval = setInterval(drawMenu, 1000 / 60);
 }

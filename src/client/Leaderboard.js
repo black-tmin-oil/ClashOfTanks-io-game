@@ -3,7 +3,7 @@ const rows = document.querySelectorAll('#leaderboard table tr');
 
 export function updateLeaderboard(data) {
   for (let i = 0; i < data.length; i++) {
-    rows[i + 1].innerHTML = `<td>${data[i].username.slice(0, 15) || 'Anonymous'}</td><td>${
+    rows[i + 1].innerHTML = `<td>${data[i].username.slice(0, 15) || 'Guest'}</td><td>${
       data[i].score
     }</td>`;
   }
@@ -12,7 +12,7 @@ export function updateLeaderboard(data) {
   }
 }
 
-export function setLeaderboardHidden(hidden) {
+export function hideLeaderboard(hidden) {
   if (hidden) {
     leaderboard.classList.add('hidden');
   } else {

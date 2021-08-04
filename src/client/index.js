@@ -1,9 +1,9 @@
 import { connect, play } from './Networking';
-import { startRendering, stopRendering, drawName } from './Draw';
+import { startGameDraw, stopGameDraw } from './Draw';
 import { startCapturingInput, stopCapturingInput } from './Input';
 import { downloadAssets } from './AssetLoader';
 import { initState } from './State';
-import { setLeaderboardHidden } from './Leaderboard';
+import { hideLeaderboard } from './Leaderboard';
 import './css/main.css';
 const Chat = require('./Chat')
 
@@ -18,21 +18,18 @@ Promise.all([
   playMenu.classList.remove('hidden');
   usernameInput.focus();
   playButton.onclick = () => {
-    // Погнали!
     play(usernameInput.value);
-    //пользую атрибуты дом для показа/скрытия меню уведамлений и др
     playMenu.classList.add('hidden');
     initState();
     startCapturingInput();
-    startRendering();
-    setLeaderboardHidden(false);
-    //не самое лучшее решение
+    startGameDraw();
+    hideLeaderboard(false);
     Chat.prototype.setChatHidden(false);
   };
 }).catch(console.error);
 
 function onGameOver() {
   stopCapturingInput();
-  stopRendering();
+  stopGameDraw();
   playMenu.classList.remove('hidden');
 }
