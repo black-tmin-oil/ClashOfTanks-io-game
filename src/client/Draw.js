@@ -24,7 +24,7 @@ function setCanvasDimensions() {
 window.addEventListener('resize', debounce(40, setCanvasDimensions));
 
 function render() {
-  const { me, others, bullets} = getCurrentState();
+  const { me, others, bullets, powerups} = getCurrentState();
   if (!me) {
     return;
   }
@@ -35,6 +35,8 @@ function render() {
   context.lineWidth = 1;
   context.strokeRect(canvas.width / 2 - me.x, canvas.height / 2 - me.y, MAP_SIZE, MAP_SIZE);
 
+  powerups.forEach(p => renderPowerups(me, p));
+
   bullets.forEach(renderBullet.bind(null, me));
 
   renderPlayer(me, me);
@@ -42,8 +44,8 @@ function render() {
 }
 
 function renderBackground(x, y) {
-  const backgroundX = MAP_SIZE / 2 - x + canvas.width / 2;
-  const backgroundY = MAP_SIZE / 2 - y + canvas.height / 2;
+  // const backgroundX = MAP_SIZE / 2 - x + canvas.width / 2;
+  // const backgroundY = MAP_SIZE / 2 - y + canvas.height / 2;
 
   context.fillStyle = '#7a7a52';
   context.fillRect(0, 0, canvas.width, canvas.height);
@@ -51,17 +53,24 @@ function renderBackground(x, y) {
 
 // отрисовка танка на заданной координате
 function renderPlayer(me, player) {
-  const { x, y, direction, username } = player;
+  const { x, y, direction, username, powerups } = player;
   const canvasX = canvas.width / 2 + x - me.x;
   const canvasY = canvas.height / 2 + y - me.y;
-
+  //console.log(powerups)
   context.save();
   context.translate(canvasX, canvasY);
 
   context.textAlign = 'center';
   context.font = '14px Helvetica';
   context.fillStyle = 'black';
-  context.fillText(username, 0, -50)
+  context.fillText(username, 0, -60)
+
+  //context.drawImage(getAsset('powerup.png'), canvasX, canvasY)
+  context.shadowColor = 'black';
+  context.shadowBlur = 30;
+  context.shadowOffsetX = 20;
+  context.shadowOffsetY = 20;
+  context.fill();
 
   context.rotate(direction);
   context.drawImage(
@@ -71,6 +80,16 @@ function renderPlayer(me, player) {
     PLAYER_RADIUS * 2,
     PLAYER_RADIUS * 2,
   );
+  if (powerups[Constants.POWERUP_SHIELD]) {
+    //context.rotate(direction)
+    context.drawImage(
+      getAsset('shield.png'),
+      -PLAYER_RADIUS-10,
+      -PLAYER_RADIUS-5,
+      PLAYER_RADIUS * 2.5,
+      PLAYER_RADIUS * 2.5,
+    );
+  }
   context.restore();
 
   context.fillStyle = 'white';
@@ -87,6 +106,7 @@ function renderPlayer(me, player) {
     PLAYER_RADIUS * 2 * (1 - player.hp / PLAYER_MAX_HP),
     2,
   );
+  
 }
 
 function renderBullet(me, bullet) {
@@ -98,6 +118,16 @@ function renderBullet(me, bullet) {
     BULLET_RADIUS * 2,
     BULLET_RADIUS * 2,
   );
+}
+
+
+function renderPowerups(me,powerups) {
+  const {x, y} = powerups
+  const canvasX = canvas.width / 2 + x - me.x
+  const canvasY = canvas.height / 2 + y - me.y
+  context.save()
+  context.drawImage(getAsset('powerup.png'), canvasX, canvasY);
+  context.restore()
 }
 
 function  drawMenu() {

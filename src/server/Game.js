@@ -1,10 +1,12 @@
-//основная логика игры на сервере. менедж игрока и симулирование игры
+//основная логика игры на сервере. симулирование игры
 const Constants = require('../lib/Constants');
 const Player = require('./Player');
-const applyCollisions = require('../lib/Utils');
+const Powerup = require('./Powerup');
+const Utils = require('../lib/Utils');
 
 class Game {
   constructor() {
+    this.powerups = [];
     this.sockets = {};
     this.players = {};
     this.bullets = [];
@@ -18,7 +20,7 @@ class Game {
   addPlayer(socket, username) {
     this.sockets[socket.id] = socket;
 
-    // Generate a position to start this player at.
+    // начальная рандомная позиция игрока
     const x = Constants.MAP_SIZE * (0.25 + Math.random() * 0.5);
     const y = Constants.MAP_SIZE * (0.25 + Math.random() * 0.5);
     this.players[socket.id] = new Player(socket.id, username, x, y);
@@ -41,17 +43,16 @@ class Game {
     const dt = (now - this.lastUpdateTime) / 1000;
     this.lastUpdateTime = now;
 
-    // Update each bullet
+    //обновление каждой пули
     const bulletsToRemove = [];
     this.bullets.forEach(bullet => {
       if (bullet.update(dt)) {
-        // Destroy this bullet
         bulletsToRemove.push(bullet);
       }
     });
     this.bullets = this.bullets.filter(bullet => !bulletsToRemove.includes(bullet));
 
-    // Update each player
+    //обновление каждого игрока 
     Object.keys(this.sockets).forEach(playerID => {
       const player = this.players[playerID];
       const newBullet = player.update(dt);
@@ -60,16 +61,24 @@ class Game {
       }
     });
 
-    // Apply collisions, give players score for hitting bullets
-    const destroyedBullets = applyCollisions(Object.values(this.players), this.bullets);
+    //колизии player-bullet
+    const destroyedBullets = Utils.bulletCollisions(Object.values(this.players), this.bullets);
     destroyedBullets.forEach(b => {
       if (this.players[b.parentID]) {
-        this.players[b.parentID].onDealtDamage();
+        this.players[b.parentID].onCreateDamage();
       }
     });
     this.bullets = this.bullets.filter(bullet => !destroyedBullets.includes(bullet));
+    
+    //колизии player-powerup
+    const destroyedPowerups = Utils.powerupCollisions(Object.values(this.players), this.powerups)
+    this.powerups = this.powerups.filter(powerup => !destroyedPowerups.includes(powerup))
 
-    // Check if any players are dead
+    //обновление паверапов на канве
+    while (this.powerups.length < 5) {
+      this.powerups.push(Powerup.prototype.create())
+    }
+    // проверка если кто либо из игроков убит
     Object.keys(this.sockets).forEach(playerID => {
       const socket = this.sockets[playerID];
       const player = this.players[playerID];
@@ -79,7 +88,7 @@ class Game {
       }
     });
 
-    // Send a game update to each player every other time
+    // посылать обновление игры каждому игроку
     if (this.shouldSendUpdate) {
       const leaderboard = this.getLeaderboard();
       Object.keys(this.sockets).forEach(playerID => {
@@ -113,6 +122,7 @@ class Game {
       me: player.serializeForUpdate(),
       others: nearbyPlayers.map(p => p.serializeForUpdate()),
       bullets: nearbyBullets.map(b => b.serializeForUpdate()),
+      powerups: this.powerups,
       leaderboard,
     };
   }

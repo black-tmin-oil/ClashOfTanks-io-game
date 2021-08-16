@@ -19,7 +19,6 @@ const connected = new Promise(resolve => {
 
 export const connect = onGameOver => (
   connected.then(() => {
-    // регистрация колбэков
     socket.on(Constants.MSG_TYPES.GAME_UPDATE, processGameUpdate);
     Chat.create(socket, 'chat', 'chat-input')
     socket.on(Constants.MSG_TYPES.GAME_OVER, onGameOver);

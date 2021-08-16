@@ -1,6 +1,6 @@
 const express = require('express');
 const webpack = require('webpack');
-//Use webpack-dev-middleware to automatically rebuild our development bundles
+//Use webpack-dev-middleware to automatically rebuild development bundles
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const socketio = require('socket.io');
 
