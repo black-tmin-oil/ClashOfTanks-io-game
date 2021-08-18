@@ -126,7 +126,7 @@ function renderPowerups(me,powerups) {
   const canvasX = canvas.width / 2 + x - me.x
   const canvasY = canvas.height / 2 + y - me.y
   context.save()
-  context.drawImage(getAsset('powerup.png'), canvasX, canvasY);
+  context.drawImage(getAsset('pickups.png'), canvasX, canvasY);
   context.restore()
 }
 
