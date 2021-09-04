@@ -75,7 +75,7 @@ class Game {
     this.powerups = this.powerups.filter(powerup => !destroyedPowerups.includes(powerup))
 
     //обновление паверапов на канве
-    while (this.powerups.length < 5) {
+    while (this.powerups.length < Constants.POWERUP_MAX_COUNT) {
       this.powerups.push(Powerup.prototype.create())
     }
     // проверка если кто либо из игроков убит

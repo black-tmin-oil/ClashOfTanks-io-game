@@ -9,15 +9,13 @@ class Player extends Entity {
     this.hp = Constants.PLAYER_MAX_HP;
     this.fireCooldown = 0;
     this.score = 0;
-    this.hitboxSize = Constants.PLAYER_DEFAULT_HITBOX_SIZE
-    this.powerups = {}
+    this.hitboxSize = Constants.PLAYER_DEFAULT_HITBOX_SIZE;
+    this.powerups = {};
+    this.explosion = false;
   }
   
-  // Returns a newly created bullet, or null.
   update(dt) {
     super.update(dt);
-
-    // Update score
     this.score += dt * Constants.SCORE_PER_SECOND;
 
     // Make sure the player stays in bounds
@@ -25,8 +23,7 @@ class Player extends Entity {
     this.y = Math.max(0, Math.min(Constants.MAP_SIZE, this.y));
 
     this.updatePowerups()
-    // Fire a bullet, if needed
-
+    
     this.fireCooldown -= dt;
     if (this.fireCooldown <= 0) {
       this.fireCooldown += Constants.PLAYER_FIRE_COOLDOWN;
@@ -36,6 +33,11 @@ class Player extends Entity {
     return null;
   }
 
+  shootOnInput (data) {
+    if (data.shoot) {
+      
+    }
+  }
   updatePowerups () {
     for (const type of Constants.POWERUP_KEYS) {
       const powerup = this.powerups[type]
@@ -61,10 +63,11 @@ class Player extends Entity {
 
   applyPowerup (powerup) {
     this.powerups[powerup.type] = powerup
-    //console.log(this.powerups)
   }
   healthDamage() {
     this.hp -= Constants.BULLET_DAMAGE;
+    //--------------------
+    this.explosion = true;
   }
 
   onCreateDamage() {
@@ -77,7 +80,8 @@ class Player extends Entity {
       direction: this.direction,
       hp: this.hp,
       username: this.username,
-      powerups: this.powerups
+      powerups: this.powerups,
+      explosion: this.explosion,
     };
   }
 }

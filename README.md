@@ -2,15 +2,19 @@
 browser multiplayer game. 
 
 ## About
-**THE PROJECT ISN'T DONE YET!** The game is written in es6 classes.
-Each object in the game is a class, which makes it possible to add new functionality.
+**Game Prototype** This game was written in es6 classes.
+Each object in the game is a class, which makes it possible to add new functionality easily.
 The core logic of the game is calculated on the server and broadcast to the client where rendering on canvas.
-Images are preloaded using the asynchronous asset load manager
+Images are preloaded using the asynchronous "assets load manager"
 
 The problem of the game lag has not been resolved yet (the game may freeze for a short time in rare cases)
 
-Use webpack-dev-middleware to automatically rebuild development bundles.
+Used webpack-dev-middleware to automatically rebuild development bundles.
 
+| Powerup  | Description |
+| ------------- | ------------- |
+| img  | healthpack  |
+| img  | shield  |
 
 ## Technologies and tools
 

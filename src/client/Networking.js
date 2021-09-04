@@ -39,6 +39,10 @@ export const updateDirection = (dir) => {
   socket.emit(Constants.MSG_TYPES.INPUT, dir);
 };
 
+export const updateShoot = (dir) => {
+  socket.emit(Constants.MSG_TYPES.INPUT, dir);
+};
+
 
 
 

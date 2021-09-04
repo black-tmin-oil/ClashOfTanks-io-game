@@ -41,12 +41,11 @@ function render() {
 
   renderPlayer(me, me);
   others.forEach(renderPlayer.bind(null, me));
+
+  //renderExplosion(me, me)
 }
 
 function renderBackground(x, y) {
-  // const backgroundX = MAP_SIZE / 2 - x + canvas.width / 2;
-  // const backgroundY = MAP_SIZE / 2 - y + canvas.height / 2;
-
   context.fillStyle = '#7a7a52';
   context.fillRect(0, 0, canvas.width, canvas.height);
 }
@@ -56,19 +55,17 @@ function renderPlayer(me, player) {
   const { x, y, direction, username, powerups } = player;
   const canvasX = canvas.width / 2 + x - me.x;
   const canvasY = canvas.height / 2 + y - me.y;
-  //console.log(powerups)
   context.save();
   context.translate(canvasX, canvasY);
 
   context.textAlign = 'center';
   context.font = '14px Helvetica';
   context.fillStyle = 'black';
-  context.fillText(username, 0, -60)
-
-  //context.drawImage(getAsset('powerup.png'), canvasX, canvasY)
+  context.fillText(username || 'Guest', 0, -60)
+  
   context.shadowColor = 'black';
-  context.shadowBlur = 30;
-  context.shadowOffsetX = 20;
+  context.shadowBlur = 40;
+  context.shadowOffsetX = 40;
   context.shadowOffsetY = 20;
   context.fill();
 
@@ -81,7 +78,6 @@ function renderPlayer(me, player) {
     PLAYER_RADIUS * 2,
   );
   if (powerups[Constants.POWERUP_SHIELD]) {
-    //context.rotate(direction)
     context.drawImage(
       getAsset('shield.png'),
       -PLAYER_RADIUS-10,
@@ -109,6 +105,17 @@ function renderPlayer(me, player) {
   
 }
 
+// function renderExplosion(me, player) {
+//   const {explosion} = player;
+//   const x = MAP_SIZE * (0.25 + Math.random() * 0.5)
+//   const y = MAP_SIZE * (0.25 + Math.random() * 0.5)
+//   const canvasX = canvas.width / 2 + x - me.x
+//   const canvasY = canvas.height / 2 + y - me.y
+//   if(explosion) {
+//     context.drawImage(getAsset('explosion.png'), canvasX, canvasY);
+//   }
+
+// }
 function renderBullet(me, bullet) {
   const { x, y } = bullet;
   context.drawImage(

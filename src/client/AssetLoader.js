@@ -3,7 +3,8 @@ const ASSET_NAMES = [
   'tank.png',
   'bullet.svg',
   'shield.png',
-  'pickups.png'
+  'pickups.png',
+  'explosion.png'
 ];
 
 const assets = {};
