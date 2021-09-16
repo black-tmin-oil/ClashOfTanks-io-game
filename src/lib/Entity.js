@@ -1,4 +1,4 @@
-//класс для всех обьектов которые требуют базовой физики
+//class for all objects that require basic physics
 class Entity {
   constructor(id, x, y, dir, speed) {
     this.id = id;
@@ -8,7 +8,6 @@ class Entity {
     this.speed = speed;
   }
 
-//сплошная физика
   update(dt) {
     this.x += dt * this.speed * Math.sin(this.direction);
     this.y -= dt * this.speed * Math.cos(this.direction);

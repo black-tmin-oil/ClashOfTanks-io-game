@@ -1,4 +1,4 @@
-//основная логика игры на сервере. симулирование игры
+//The main logic of the game on the server. Simulation of the game
 const Constants = require('../lib/Constants');
 const Player = require('./Player');
 const Powerup = require('./Powerup');
@@ -20,7 +20,7 @@ class Game {
   addPlayer(socket, username) {
     this.sockets[socket.id] = socket;
 
-    // начальная рандомная позиция игрока
+    // The initial random position of the player 
     const x = Constants.MAP_SIZE * (0.25 + Math.random() * 0.5);
     const y = Constants.MAP_SIZE * (0.25 + Math.random() * 0.5);
     this.players[socket.id] = new Player(socket.id, username, x, y);
@@ -37,13 +37,20 @@ class Game {
     }
   }
 
+  // handleShoot(socket, e) {
+  //   if (this.players[socket.id]) {
+  //     this.players[socket.id].fire();
+  //     //console.log(this.players[socket.id].fire())
+  //   }
+  // }
+
   update() {
     // Calculate time elapsed
     const now = Date.now();
     const dt = (now - this.lastUpdateTime) / 1000;
     this.lastUpdateTime = now;
 
-    //обновление каждой пули
+    //update each bullet
     const bulletsToRemove = [];
     this.bullets.forEach(bullet => {
       if (bullet.update(dt)) {
@@ -52,16 +59,21 @@ class Game {
     });
     this.bullets = this.bullets.filter(bullet => !bulletsToRemove.includes(bullet));
 
-    //обновление каждого игрока 
+    //update each player
     Object.keys(this.sockets).forEach(playerID => {
       const player = this.players[playerID];
       const newBullet = player.update(dt);
       if (newBullet) {
         this.bullets.push(newBullet);
       }
+      // const newBullet = player.fire();
+      // if (newBullet) {
+      //   this.bullets.push(newBullet);
+      // }
     });
 
-    //колизии player-bullet
+
+    //player-bullet collision
     const destroyedBullets = Utils.bulletCollisions(Object.values(this.players), this.bullets);
     destroyedBullets.forEach(b => {
       if (this.players[b.parentID]) {
@@ -70,15 +82,15 @@ class Game {
     });
     this.bullets = this.bullets.filter(bullet => !destroyedBullets.includes(bullet));
     
-    //колизии player-powerup
+    //player-powerup collision
     const destroyedPowerups = Utils.powerupCollisions(Object.values(this.players), this.powerups)
     this.powerups = this.powerups.filter(powerup => !destroyedPowerups.includes(powerup))
 
-    //обновление паверапов на канве
+    //update powerups on canvas
     while (this.powerups.length < Constants.POWERUP_MAX_COUNT) {
       this.powerups.push(Powerup.prototype.create())
     }
-    // проверка если кто либо из игроков убит
+    // Check if anyone was killed 
     Object.keys(this.sockets).forEach(playerID => {
       const socket = this.sockets[playerID];
       const player = this.players[playerID];
@@ -88,7 +100,7 @@ class Game {
       }
     });
 
-    // посылать обновление игры каждому игроку
+    // send a game update to each player
     if (this.shouldSendUpdate) {
       const leaderboard = this.getLeaderboard();
       Object.keys(this.sockets).forEach(playerID => {

@@ -1,8 +1,9 @@
-//примитивная реализация обновления состояния на клиенте без учета так называймого игрового лага 
-//что приводит к редким задержкам игры на несколько милисекунд
-//дабы избежать этого нужно реализовать так наз игровой буфер. позже.
-import { updateLeaderboard } from './Leaderboard';
+// Primitive implementation of the status update on the client, excluding so-called game lag
+// that may lead to rare game delays for a few milisec
+// In order to avoid this, it is necessary to implement a game buffer. later. 
 
+import { updateLeaderboard } from './Leaderboard';
+import { save } from './Statistic';
 let lastGameUpdate = 0;
 
 export function initState() {
@@ -12,6 +13,7 @@ export function initState() {
 export function processGameUpdate(update) {
   lastGameUpdate = update;
   updateLeaderboard(update.leaderboard);
+  save(update.me)
 }
 
 export function getCurrentState() {

@@ -6,13 +6,13 @@ const Constants = require('../lib/Constants');
 
 const { PLAYER_RADIUS, PLAYER_MAX_HP, BULLET_RADIUS, MAP_SIZE } = Constants;
 
-//создание контекста canvas
+//canvas context
 const canvas = document.getElementById('game-canvas');
 const context = canvas.getContext('2d');
 
 setCanvasDimensions();
 
-//взято с mozilla mdn
+//mozilla mdn
 function setCanvasDimensions() {
   // On small screens (e.g. phones), "zooming out" so players can still see at least
   // 800 in-game units of width.
@@ -38,7 +38,6 @@ function render() {
   powerups.forEach(p => renderPowerups(me, p));
 
   bullets.forEach(renderBullet.bind(null, me));
-
   renderPlayer(me, me);
   others.forEach(renderPlayer.bind(null, me));
 
@@ -50,7 +49,7 @@ function renderBackground(x, y) {
   context.fillRect(0, 0, canvas.width, canvas.height);
 }
 
-// отрисовка танка на заданной координате
+// draw tank
 function renderPlayer(me, player) {
   const { x, y, direction, username, powerups } = player;
   const canvasX = canvas.width / 2 + x - me.x;
@@ -146,13 +145,11 @@ function  drawMenu() {
 
 let renderInterval = requestAnimationFrame(drawMenu, 1000 / 60);
 
-//отвечает за отрисовку игры вместо меню
 export function startGameDraw() {
   clearInterval(renderInterval);
   renderInterval = setInterval(render, 1000 / 60);
 }
 
-//наоборот
 export function stopGameDraw() {
   clearInterval(renderInterval);
   renderInterval = setInterval(drawMenu, 1000 / 60);

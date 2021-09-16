@@ -14,7 +14,7 @@ class Powerup {
   create () {
     const x = Constants.MAP_SIZE * (0.25 + Math.random() * 0.5)
     const y = Constants.MAP_SIZE * (0.25 + Math.random() * 0.5)
-    //рандомный выбор типа паверапа
+    //random selection of powerup type 
     const type = Utils.choiceArray(Constants.POWERUP_KEYS)
     const dataRanges = Constants.POWERUP_DATA[type]
     let data = null
@@ -35,6 +35,3 @@ class Powerup {
 }
 
 module.exports = Powerup
-
-// при коллизии танка и паверапа, исходя из типа и нагрузки(data) последнего,
-// игрок получает какой либо апгрейд

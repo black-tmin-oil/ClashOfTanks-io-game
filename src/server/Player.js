@@ -32,12 +32,9 @@ class Player extends Entity {
 
     return null;
   }
-
-  shootOnInput (data) {
-    if (data.shoot) {
-      
-    }
-  }
+  // fire() {
+  //   return new Bullet(this.id, this.x, this.y, null)
+  // }
   updatePowerups () {
     for (const type of Constants.POWERUP_KEYS) {
       const powerup = this.powerups[type]
@@ -82,6 +79,7 @@ class Player extends Entity {
       username: this.username,
       powerups: this.powerups,
       explosion: this.explosion,
+      score: this.score,
     };
   }
 }

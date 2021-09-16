@@ -1,9 +1,9 @@
-//глобальные константы для клиента и сервера
+//constants for both client n server
 module.exports = {
   PLAYER_RADIUS: 60,
   PLAYER_MAX_HP: 100,
   PLAYER_SPEED: 400,
-  PLAYER_FIRE_COOLDOWN: 0.25,
+  PLAYER_FIRE_COOLDOWN: 0.50,
   PLAYER_DEFAULT_HITBOX_SIZE: 20,
   PLAYER_SHIELD_HITBOX_SIZE: 45,
 
@@ -17,7 +17,7 @@ module.exports = {
   SOCKET_CHAT_CLIENT_SERVER: 'chat-client-to-server',
   SOCKET_CHAT_SERVER_CLIENT: 'chat-server-to-client',
   POWERUP_HITBOX_SIZE: 5,
-  POWERUP_MAX_COUNT: 20,
+  POWERUP_MAX_COUNT: 2,
   POWERUP_MIN_DURATION: 5000,
   POWERUP_MAX_DURATION: 15000,
   POWERUP_HEALTHPACK: 'healthpack',
@@ -36,5 +36,6 @@ module.exports = {
     GAME_UPDATE: 'update',
     INPUT: 'input',
     GAME_OVER: 'dead',
+    SHOOT: 'shoot',
   },
 };

@@ -1,4 +1,4 @@
-//менеджер загрузки ассетов перед игорой  Asset loader подглядено в mozilla MDN
+//Asset loader
 const ASSET_NAMES = [
   'tank.png',
   'bullet.svg',

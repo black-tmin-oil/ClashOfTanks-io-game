@@ -33,6 +33,8 @@ io.on('connection', socket => {
   socket.on(Constants.MSG_TYPES.JOIN_GAME, joinGame);
   socket.on(Constants.MSG_TYPES.INPUT, handleInput);
 
+  // socket.on(Constants.MSG_TYPES.SHOOT, handleShoot);
+
   socket.on(Constants.SOCKET_CHAT_CLIENT_SERVER, data => {
     io.sockets.emit(Constants.SOCKET_CHAT_SERVER_CLIENT, {
       username: game.getPlayerNameBySocketId(socket.id),
@@ -52,6 +54,10 @@ function handleInput(dir) {
   game.handleInput(this, dir);
 }
 
+// function handleShoot(e) {
+//   game.handleShoot(this, e);
+//   console.log(e)
+// }
 function onDisconnect() {
   game.removePlayer(this);
 }

@@ -1,4 +1,4 @@
-//общение с сервером
+//client server connection
 
 import io from 'socket.io-client';
 import { processGameUpdate } from './State';
@@ -39,9 +39,9 @@ export const updateDirection = (dir) => {
   socket.emit(Constants.MSG_TYPES.INPUT, dir);
 };
 
-export const updateShoot = (dir) => {
-  socket.emit(Constants.MSG_TYPES.INPUT, dir);
-};
+// export const updateShoot = (dir) => {
+//   socket.emit(Constants.MSG_TYPES.SHOOT, dir);
+// };
 
 
 

@@ -1,7 +1,7 @@
-//файл содержит вспомогательные функции используемые на клиенте и сервере
+//This file contains auxiliary functions, used on the client server.
 const Constants = require('./Constants')
 
-//возвращает рандомный элемент из массива
+//returns random element from array
 const choiceArray = array => {
   return array[randRangeInt(0, array.length)]
 }

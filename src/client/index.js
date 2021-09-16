@@ -6,6 +6,7 @@ import { initState } from './State';
 import { hideLeaderboard } from './Leaderboard';
 import './css/main.css';
 import Chat from './Chat';
+import { get } from './Statistic';
 
 const playMenu = document.getElementById('play-menu');
 const playButton = document.getElementById('play-button');
@@ -16,6 +17,7 @@ Promise.all([
   downloadAssets(),
 ]).then(() => {
   playMenu.classList.remove('hidden');
+  get();
   usernameInput.focus();
   playButton.onclick = () => {
     play(usernameInput.value);
