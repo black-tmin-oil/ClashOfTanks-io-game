@@ -3,8 +3,8 @@ const rows = document.querySelectorAll('#play-menu h4');
 //player best score presistence
 export function save(me) {
     let lastSeen = new Date(Date.now()).toString()
-    var score = me.score;
-    var highscore = localStorage.getItem("highscore");
+    let score = me.score;
+    let highscore = localStorage.getItem("highscore");
 
     if(highscore !== null){
         if (score > highscore) {
@@ -19,8 +19,8 @@ export function save(me) {
 }
 
 export function get() {
-    var r = localStorage.getItem('player');
-    var w = JSON.parse(r).bestScore
+    let r = localStorage.getItem('player');
+    let w = JSON.parse(r).bestScore
     console.log(w)
     console.log('hi')
 }
@@ -32,7 +32,7 @@ export function get() {
 //         localStorage.setItem('player', JSON.stringify(player)); 
 //     }
 //     get() {
-//         var r = localStorage.getItem('player');
+//         let r = localStorage.getItem('player');
 //         console.log('retrievedObject: ', JSON.parse(player))
 
 //     }

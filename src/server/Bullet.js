@@ -15,4 +15,4 @@ class Bullet extends Entity {
   }
 }
 
-module.exports = Bullet;
+export default Bullet;

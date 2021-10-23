@@ -3,8 +3,8 @@
 import io from 'socket.io-client';
 import { processGameUpdate } from './State';
 
-const Constants = require('../lib/Constants');
-const Chat = require('./Chat')
+import Constants from '../lib/Constants';
+import Chat from './Chat';
 
 
 const socketProtocol = (window.location.protocol.includes('https')) ? 'wss' : 'ws';

@@ -1,5 +1,5 @@
 //constants for both client n server
-module.exports = {
+export default {
   PLAYER_RADIUS: 60,
   PLAYER_MAX_HP: 100,
   PLAYER_SPEED: 400,

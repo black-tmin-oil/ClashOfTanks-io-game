@@ -1,5 +1,5 @@
 //This file contains auxiliary functions, used on the client server.
-const Constants = require('./Constants')
+import Constants from './Constants';
 
 //returns random element from array
 const choiceArray = array => {
@@ -57,7 +57,7 @@ const randRangeInt = (min, max) => {
   return Math.floor(Math.random() * (max - min)) + min
 }
 
-module.exports = {
+export default {
   bulletCollisions,
   choiceArray,
   powerupCollisions,

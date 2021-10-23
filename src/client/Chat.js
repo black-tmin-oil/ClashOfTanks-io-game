@@ -1,5 +1,4 @@
-
-const Constants = require('../lib/Constants');
+import Constants from '../lib/Constants';
 const chats = document.getElementById('chat');
 
 class Chat {
@@ -48,4 +47,4 @@ class Chat {
   }
 }
 
-module.exports = Chat
+export default Chat;

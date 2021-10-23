@@ -2,7 +2,7 @@ import { debounce } from 'throttle-debounce';
 import { getAsset } from './AssetLoader';
 import { getCurrentState } from './State';
 
-const Constants = require('../lib/Constants');
+import Constants from '../lib/Constants';
 
 const { PLAYER_RADIUS, PLAYER_MAX_HP, BULLET_RADIUS, MAP_SIZE } = Constants;
 

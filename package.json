@@ -5,8 +5,7 @@
   "main": "src/server/server.js",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
-    "develop": "cross-env NODE_ENV=development node src/server/server.js",
-    "start": "node src/server/server.js"
+    "develop": "cross-env NODE_ENV=development node src/server/server.js"
   },
   "dependencies": {
     "@babel/core": "^7.10.2",

@@ -1,6 +1,6 @@
-const Entity = require('../lib/Entity');
-const Bullet = require('./Bullet');
-const Constants = require('../lib/Constants');
+import Entity from '../lib/Entity';
+import Bullet from './Bullet';
+import Constants from '../lib/Constants';
 
 class Player extends Entity {
   constructor(id, username, x, y) {
@@ -84,4 +84,4 @@ class Player extends Entity {
   }
 }
 
-module.exports = Player;
+export default Player;
