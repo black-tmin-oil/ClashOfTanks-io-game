@@ -1,8 +1,8 @@
 //The main logic of the game on the server. Simulation of the game
-const Constants = require('../lib/Constants');
-const Player = require('./Player');
-const Powerup = require('./Powerup');
-const Utils = require('../lib/Utils');
+import Constants  from '../lib/Constants';
+import Player  from './Player';
+import Powerup  from './Powerup';
+import Utils  from '../lib/Utils';
 
 class Game {
   constructor() {

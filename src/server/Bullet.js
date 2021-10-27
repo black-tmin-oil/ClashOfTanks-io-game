@@ -1,6 +1,6 @@
-const shortid = require('shortid');
-const Entity = require('../lib/Entity');
-const Constants = require('../lib/Constants');
+import shortid from 'shortid';
+import Entity from '../lib/Entity';
+import Constants  from '../lib/Constants';
 
 class Bullet extends Entity {
   constructor(parentID, x, y, dir) {

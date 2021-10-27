@@ -1,5 +1,5 @@
-const Constants = require('../lib/Constants')
-const Utils = require('../lib/Utils')
+import Constants from '../lib/Constants'
+import Utils from '../lib/Utils'
 
 class Powerup {
   constructor (type, data, duration, x, y) {
